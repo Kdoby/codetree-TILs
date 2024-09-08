@@ -12,7 +12,7 @@ int ans;
 bool search (int param[][12], int start) {
     int s = start;
     int i = 1;
-    while (i != 15) {
+    while (i != 16) {
         if(param[i][s] == 1) {
             ++s;
         }
@@ -35,6 +35,9 @@ bool search (int param[][12], int start) {
 }
 
 void Backtracking(int p[][12], int idx1, int idx2, int now, int cnt) {
+    p[idx1][idx2] = 1;
+    p[idx1][idx2 + 1] = 2;
+    ++cnt;
     bool is_fit = true;
     for(int i=1; i<=n; ++i) {
         if(!search(p, i)) {
@@ -44,9 +47,6 @@ void Backtracking(int p[][12], int idx1, int idx2, int now, int cnt) {
     }
     if(is_fit) 
         ans = min(ans, cnt);
-    p[idx1][idx2] = 1;
-    p[idx1][idx2 + 1] = 2;
-    ++cnt;
     for(int i=now + 1; i<vec.size(); ++i) {
         Backtracking(p, vec[i].second, vec[i].first, i, cnt);
         p[vec[i].second][vec[i].first] = 0;
@@ -67,6 +67,16 @@ int main() {
     for(int i=1; i<=n; ++i) {
         search(arr, i);
     }
+    int fp[16][12] = {0, };
+    bool is_fit = true;
+    for(int i=1; i<=n; ++i) {
+        if(!search(fp, i)) {
+            is_fit = false;
+            break;
+        }
+    }
+    if(is_fit) 
+        ans = min(ans, 0);
     for(int i=0; i<vec.size(); ++i) {
         int p[16][12] = {0, };
         Backtracking(p, vec[i].second, vec[i].first, i, 0);
