@@ -10,8 +10,8 @@ bool compare (pair<int, int> lhs, pair<int, int> rhs) {
 
 int ans;
 void Backtracking(vector<pair<int, int>> v, int now, int cnt) {
+    ans = max(ans, cnt);
     if(now + 1 == vec.size()) {
-        ans = max(ans, cnt);
         return;
     }
     for(int i=now+1; i<vec.size(); ++i) {
@@ -19,6 +19,7 @@ void Backtracking(vector<pair<int, int>> v, int now, int cnt) {
         if(vec[now].second < vec[i].first) {
             v.push_back(make_pair(vec[i].first, vec[i].second));
             Backtracking(v, i, v.size());
+            v.pop_back();
         }
     }   
 }
