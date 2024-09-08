@@ -35,10 +35,6 @@ bool search (int param[][12], int start) {
 }
 
 void Backtracking(int p[][12], int idx1, int idx2, int now, int cnt) {
-    p[idx1][idx2] = 1;
-    p[idx1][idx2 + 1] = 2;
-    ++cnt;
-    
     bool is_fit = true;
     for(int i=1; i<=n; ++i) {
         if(!search(p, i)) {
@@ -48,6 +44,9 @@ void Backtracking(int p[][12], int idx1, int idx2, int now, int cnt) {
     }
     if(is_fit) 
         ans = min(ans, cnt);
+    p[idx1][idx2] = 1;
+    p[idx1][idx2 + 1] = 2;
+    ++cnt;
     for(int i=now + 1; i<vec.size(); ++i) {
         Backtracking(p, vec[i].second, vec[i].first, i, cnt);
         p[vec[i].second][vec[i].first] = 0;
