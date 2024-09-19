@@ -11,8 +11,10 @@ void solve(int y, int x) {
     for(int i=y+1; i<=n; ++i) {
         for(int j=x+1; j<=m; ++j) {
             if(arr[i][j] > arr[y][x]) {
-                dp[i][j] = max(dp[i][j], dp[y][x] + 1);
-                solve(i, j);
+                if(dp[i][j] < dp[y][x] + 1) {
+                    dp[i][j] = dp[y][x] + 1;
+                    solve(i, j);
+                }
             }
         }
     }
