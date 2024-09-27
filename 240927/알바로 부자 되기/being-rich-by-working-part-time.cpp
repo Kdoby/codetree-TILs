@@ -5,6 +5,7 @@ using namespace std;
 
 vector<pair<int, int>> vec;
 int pay[1000];
+int dp[1000];
 int ans;
 
 int main() {
@@ -15,17 +16,21 @@ int main() {
         cin>>s>>e>>p;
         vec.push_back(make_pair(s, e));
         pay[i] = p;
+        dp[i] = p;
     }
     for(int i=0; i<N; ++i) {
         for(int j=i+1; j<N; ++j) {
             if(vec[i].second < vec[j].first) {
-                pay[j] = max(pay[j], pay[j] + pay[i]);
+                dp[j] = max(dp[j], dp[i] + pay[j]);
+                //cout<<dp[j]<<'\n';
             }
         }
     }
     for(int i=0; i<N; ++i) {
-        ans = max(ans, pay[i]);
+        //cout<<dp[i] <<" ";
+        ans = max(ans, dp[i]);
     }
+    //cout<<'\n';
     cout<<ans;
     return 0;
 }
