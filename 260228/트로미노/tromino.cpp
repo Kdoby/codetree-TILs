@@ -15,7 +15,7 @@ void calculate_block1(int row, int col) {
         sum = cur + grid[row][col + 1] + grid[row + 1][col];
         ans = max(ans, sum);
     }
-    if(row + 1 < n && col - 1 > 0) {
+    if(row + 1 < n && col - 1 >= 0) {
         sum = cur + grid[row + 1][col] + grid[row][col - 1];
         ans = max(ans, sum);
         sum = cur + grid[row + 1][col] + grid[row + 1][col - 1];
@@ -26,11 +26,11 @@ void calculate_block1(int row, int col) {
 void calculate_block2(int row, int col) {
     int cur = grid[row][col];
     int sum = cur;
-    if(col - 1 > 0 && col + 1 < m) {
+    if(col - 1 >= 0 && col + 1 < m) {
         sum = cur + grid[row][col - 1] + grid[row][col + 1];
         ans = max(ans, sum);
     }
-    if(row - 1 > 0 && row + 1 < n) {
+    if(row - 1 >= 0 && row + 1 < n) {
         sum = cur + grid[row - 1][col] + grid[row + 1][col];
         ans = max(ans, sum);
     }
